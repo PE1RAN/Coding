@@ -1,0 +1,229 @@
+---
+title: "Untitled"
+output:
+  pdf_document: default
+  html_document: default
+date: "2023-04-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+set.seed(1)
+```
+
+```{r}
+library(rstan)
+library(Rlab)
+```
+
+```{r}
+train <- read.csv("train_new.csv")
+test <- read.csv("test_new.csv")
+#train
+```
+```{r}
+data_train <- train[-c(1,4,11)]
+data_test <- test[-c(1,3,10)]
+```
+
+```{r}
+#data_train["SibSp"] = ceiling(data_train["SibSp"]/10)
+#data_train["Parch"] = ceiling(data_train["Parch"]/10)
+data_train["Sex"] = (data_train$Sex=="male")*1
+#data_test["SibSp"] = ceiling(data_test["SibSp"]/10)
+#data_test["Parch"] = ceiling(data_test["Parch"]/10)
+data_test["Sex"] = (data_test$Sex=="male")*1
+data_train["Age"] = (data_train$Age-mean(data_train$Age))/sqrt(var(data_train$Age))
+data_test["Age"] = (data_test$Age-mean(data_test$Age))/sqrt(var(data_test$Age))
+data_train["family"] = data_train$Parch+data_train$SibSp
+data_test["family"] = data_test$Parch+data_test$SibSp
+data_train["family"] = (data_train$family-mean(data_train$family))/sqrt(var(data_train$family))
+data_test["family"] = (data_test$family-mean(data_test$family))/sqrt(var(data_test$family))
+```
+
+```{r}
+data_stan <- list(
+  N = 889,
+  n = 417,
+  vive_train = data_train$Survived,
+  class1_train = (data_train$Pclass==1)*1,
+  class1_test = (data_test$Pclass==1)*1,
+  class2_train = (data_train$Pclass==2)*1,
+  class2_test = (data_test$Pclass==2)*1,
+  sex_train = data_train$Sex,
+  sex_test = data_test$Sex,
+  #young_train = (data_train$Age<10)*1,
+  #young_test = (data_test$Age<10)*1,
+  #old_train = (data_train$Age>60)*1,
+  #old_test = (data_test$Age>60)*1
+  age_train = data_train$Age,
+  age_test = data_test$Age
+  #family_train = data_train$family,
+  #family_test = data_test$family
+)
+```
+```{r}
+fit <- stan(file = "first.stan", data = data_stan, iter = 2000, chain = 4)
+```
+```{r}
+#print(fit)
+cor(data_train[,-c(1,8)])
+```
+```{r}
+#plot(fit, pars = c("pred"))
+fit_ss <- extract(fit, pars = "pred", permuted = TRUE)$pred
+```
+
+```{r}
+pred_stan <- 1:417
+for(i in 1:417) {
+  #pred_stan[i] <- mean(rbern(1,fit_ss))
+  pred_stan[i] <- mean(fit_ss[,i])
+  pred_stan[i] <- (pred_stan[i] > 0.5) * 1
+  #pred_stan[i] <- rbern(1,pred_stan[i])
+}
+```
+
+```{r}
+freit <- glm(Survived ~ Pclass+Sex+Age,family=binomial(link='logit'),data=data_train)
+summary(freit)
+```
+```{r}
+pred <- predict(freit, data_test, type="response")
+pred <- (pred > 0.5)*1
+```
+```{r}
+result <- read.csv("submission.csv")
+#result
+```
+```{r}
+real <- c(result[1:152,]$Survived,result[154:418,]$Survived)
+#mean(pred == real)
+mean(pred_stan == real)
+```
+
+```{r}
+plot(fit, pars = c("intercept","Pclass","Sex_Male","Age"))
+```
+
+
+```{r}
+intercept <- extract(fit, pars = c("intercept","Pclass","Sex_Male","Age"), permuted = TRUE)$beta
+par(mfrow=c(2,3))
+plot(density(betas[,1]), main="density of intercept")
+plot(density(betas[,2]), main="density of beta1")
+plot(density(betas[,3]), main="density of beta2")
+plot(density(betas[,4]), main="density of beta3")
+plot(density(betas[,5]), main="density of beta4")
+#plot(density(betas[,6]))
+```
+```{r}
+library("bayesplot")
+library("ggplot2")
+library("rstan")
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+```
+
+
+
+```{r}
+par(mfrow=c(1,2))
+schools_mod_cp <- stan_model("first.stan")
+fit_cp <- sampling(schools_mod_cp, data = data_stan, seed = 1, control = list(adapt_delta = 0.9))
+# Extract posterior draws for later use
+posterior_cp <- as.array(fit_cp)
+np_cp <- nuts_params(fit_cp)
+```
+```{r}
+par(mfrow=c(2,3))
+color_scheme_set("mix-brightblue-gray")
+mcmc_trace(posterior_cp, pars = "intercept", np = np_cp) + 
+  xlab("Post-warmup iteration")
+mcmc_trace(posterior_cp, pars = "Pclass[1]", np = np_cp) + 
+  xlab("Post-warmup iteration")
+mcmc_trace(posterior_cp, pars = "Pclass[2]", np = np_cp) + 
+  xlab("Post-warmup iteration")
+mcmc_trace(posterior_cp, pars = "Sex_Male", np = np_cp) + 
+  xlab("Post-warmup iteration")
+mcmc_trace(posterior_cp, pars = "Age", np = np_cp) + 
+  xlab("Post-warmup iteration")
+par(mfrow=c(1,2))
+```
+```{r fig.width=9}
+available_mcmc(pattern = "_nuts_")
+lp_cp <- log_posterior(fit_cp)
+
+mcmc_pairs(posterior_cp, np = np_cp, 
+           pars = c("intercept","Pclass[1]","Pclass[2]","Sex_Male","Age"),
+           off_diag_args = list(size = 0.75))
+```
+```{r}
+fit2 <- stan(file = "second.stan", data = data_stan, iter = 1000, chain = 4)
+```
+```{r}
+fit_ss2 <- extract(fit2, pars = "pred", permuted = TRUE)$pred
+```
+```{r}
+pred_stan2 <- 1:417
+for(i in 1:417) {
+  #pred_stan[i] <- mean(rbern(1,fit_ss))
+  pred_stan2[i] <- mean(fit_ss2[,i])
+  pred_stan2[i] <- (pred_stan2[i] > 1) * 1
+  #pred_stan[i] <- rbern(1,pred_stan[i])
+}
+```
+
+```{r}
+freit2 <- lm(Survived ~ Pclass+Sex+Age,data=data_train)
+pred2 <- predict(freit2, data_test, type="response")
+pred2 <- (pred2 > 0.5)*1
+```
+
+```{r}
+mean(pred_stan2 == real)
+mean(pred2 == real)
+```
+
+
+```{r}
+temp1 <- c(fit@sim$samples[4][[1]]$intercept,fit@sim$samples[2][[1]]$intercept,fit@sim$samples[3][[1]]$intercept,fit@sim$samples[1][[1]]$intercept)
+temp2 <- c(fit@sim$samples[4][[1]]$`Pclass[1]`,fit@sim$samples[2][[1]]$`Pclass[1]`,fit@sim$samples[3][[1]]$`Pclass[1]`,fit@sim$samples[1][[1]]$`Pclass[1]`)
+temp3 <- c(fit@sim$samples[4][[1]]$`Pclass[2]`,fit@sim$samples[2][[1]]$`Pclass[2]`,fit@sim$samples[3][[1]]$`Pclass[2]`,fit@sim$samples[1][[1]]$`Pclass[2]`)
+temp4 <- c(fit@sim$samples[4][[1]]$Sex_Male,fit@sim$samples[2][[1]]$Sex_Male,fit@sim$samples[3][[1]]$Sex_Male,fit@sim$samples[1][[1]]$Sex_Male)
+temp5 <- c(fit@sim$samples[4][[1]]$Age,fit@sim$samples[2][[1]]$Age,fit@sim$samples[3][[1]]$Age,fit@sim$samples[1][[1]]$Age)
+plot(acf(temp1),main="intercept")
+plot(acf(temp2),main="Pclass[1]")
+plot(acf(temp3),main="Pclass[2]")
+plot(acf(temp4),main="Sex_Male")
+plot(acf(temp5),main="Age")
+effectiveSize(temp1)/length(temp1)
+effectiveSize(temp2)/length(temp2)
+effectiveSize(temp3)/length(temp3)
+effectiveSize(temp4)/length(temp4)
+effectiveSize(temp5)/length(temp5)
+```
+
+
+```{r}
+stan_diag(fit,
+          information = c("sample","stepsize", "treedepth","divergence"))
+```
+
+```{r}
+effectiveSize(temp1)/length(temp1)
+effectiveSize(temp2)/length(temp2)
+effectiveSize(temp3)/length(temp3)
+effectiveSize(temp4)/length(temp4)
+effectiveSize(temp5)/length(temp5)
+```
+
+
+
+
+
+
+
