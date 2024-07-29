@@ -1,0 +1,25 @@
+# first tryout
+quiver-capacity: 4
+random-seed: 1234
+max-rand-distance: 4
+max-rand-speed: 10
+max-rand-health: 5
+---
+round: 1
+random-zombies: 10
+named-zombies: 1
+shh distance: 10 speed: 20 health: 50
+---
+round: 2
+random-zombies: 10
+named-zombies: 0
+---
+round: 3
+random-zombies: 9
+named-zombies: 2
+shh1 distance: 20 speed: 1 health: 30
+SHH distance: 21 speed: 5 health: 30
+---
+round: 4
+random-zombies: 1
+named-zombies: 0
