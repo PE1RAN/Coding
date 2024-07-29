@@ -1,0 +1,487 @@
+- - -
+Please keep in mind that the autograder does not assign grades.  Project grades
+also take style, efficiency, and other deliverables into account.  Test cases
+used for grading may be completely different than those used to evaluate trial
+submissions.
+- - -
+
+Checking for unexpected file patterns:
+(Note: any file with two leading underscores or the extensions 
+.o, .stderr, .stdout will be deleted. Case will be ignored)
+
+-------------------------------------------------------------------------------
+Performing static analysis with [cppcheck --language=c++ --enable=all --suppress=missingIncludeSystem *.c* *.h*]
+
+
+-------------------------------------------------------------------------------
+Checking for style errors:
+
+Found 3081 tokens in source. 
+if this number significantly exceeds the average reported for all students,
+ your source code is too bloated and needs to be reduced in size.
+----------------------------------------------------------------
+./project1.cpp: ASCII C++ program text
+Lines with more than 80 characters may not display or print well (line 63)
+Inconsistent brace style (lines 55,52)
+	Choose between the following two styles and be consistent:
+	if ( ... ) {
+	or
+	if ( ... )
+	{
+
+-------------------------------------------------------------------------------
+All expected files found
+
+-------------------------------------------------------------------------------
+Build warnings/errors:
+Build output:
+g++ -std=c++1z -Wconversion -Wall -Werror -Wextra -pedantic  -O3 -DNDEBUG -c project1.cpp
+g++ -std=c++1z -Wconversion -Wall -Werror -Wextra -pedantic  -O3 -DNDEBUG project1.o -o superMarco
+g++ -std=c++1z -Wconversion -Wall -Werror -Wextra -pedantic  -g3 -DDEBUG project1.cpp -o superMarco_debug
+g++ -std=c++1z -Wconversion -Wall -Werror -Wextra -pedantic  -g3 -O3 project1.cpp -o superMarco_profile
+
+
+===============================================================================
+Scoring student executable...
+
+
+Test case Spec-P-Lq: Failed
+    Runtime (sec): 0.003/0.004 
+    Memory (kb): 1508/2062 
+Line: 1
+Correct output: "Star"...
+Student output: "No s"...
+
+-------------------------------------------------------------------------------
+Test case INV1: Passed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1500/2023 
+You earned 1.70/1.70 for this test case
+
+-------------------------------------------------------------------------------
+Test case INV2: Passed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1516/2044 
+You earned 1.70/1.70 for this test case
+
+-------------------------------------------------------------------------------
+Test case INV3: Passed
+    Runtime (sec): 0.003/0.006 
+    Memory (kb): 1512/2040 
+You earned 1.70/1.70 for this test case
+
+-------------------------------------------------------------------------------
+Test case INV4: Passed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1516/2040 
+You earned 1.70/1.70 for this test case
+
+-------------------------------------------------------------------------------
+Test case INV5: Passed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1516/2040 
+You earned 1.70/1.70 for this test case
+
+-------------------------------------------------------------------------------
+Test case INV6: Passed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1440/1969 
+You earned 1.70/1.70 for this test case
+
+-------------------------------------------------------------------------------
+Test case INV7: Passed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1440/1969 
+You earned 1.70/1.70 for this test case
+
+-------------------------------------------------------------------------------
+Test case INV8: Passed
+    Runtime (sec): 0.003/0.006 
+    Memory (kb): 1500/1968 
+You earned 1.70/1.70 for this test case
+
+-------------------------------------------------------------------------------
+Test case S11q: Failed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1508/2084 
+Line: 1
+Correct output: "Star"...
+Student output: "No s"...
+
+Hint: If you're getting wrong output, make sure that you can handle a pipe leading to a pipe, and a pipe leading to the Countess. 
+
+-------------------------------------------------------------------------------
+Test case S1Q: Failed
+    Runtime (sec): 0.001/0.006 
+    Memory (kb): 1500/2051 
+Line: 1
+Correct output: "Path"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+Hint: If you're failing both S1 tests (and possibly others) with no output, make sure that you can handle the long version of the output option --output 
+
+-------------------------------------------------------------------------------
+Test case S1S: Failed
+    Runtime (sec): 0.003/0.006 
+    Memory (kb): 1500/2050 
+Line: 1
+Correct output: "Path"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+-------------------------------------------------------------------------------
+Test case S3Q: Failed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1492/2050 
+Line: 1
+Correct output: "Path"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+-------------------------------------------------------------------------------
+Test case S3S: Failed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1496/2050 
+Line: 1
+Correct output: "Path"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+-------------------------------------------------------------------------------
+Test case S4q: Failed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1492/2057 
+Line: 1
+Correct output: "Star"...
+Student output: "No s"...
+
+Hint: If you're failing both S4 tests (and possibly others) with no output (or L instead of M), make sure that you can handle having no output option on the command line (default to map output). 
+
+-------------------------------------------------------------------------------
+Test case S4s: Failed
+    Runtime (sec): 0.001/0.006 
+    Memory (kb): 1496/2057 
+Line: 1
+Correct output: "Star"...
+Student output: "No s"...
+
+-------------------------------------------------------------------------------
+Test case S6Q: Failed
+    Runtime (sec): 0.001/0.006 
+    Memory (kb): 1496/2050 
+Line: 1
+Correct output: "Path"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+-------------------------------------------------------------------------------
+Test case S6S: Failed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1496/2051 
+Line: 1
+Correct output: "Path"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+-------------------------------------------------------------------------------
+Test case S8q: Failed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1504/2040 
+Line: 1
+Correct output: No solution, 6 tiles discovered.
+Student output: No solution, 3 tiles discovered.
+
+Hint: If you have too few discovered, make sure you discover the 'start' of a warp pipe, even if you don't discover the tile that it leads to. 
+
+-------------------------------------------------------------------------------
+Test case S8s: Failed
+    Runtime (sec): 0.001/0.006 
+    Memory (kb): 1504/2039 
+Line: 1
+Correct output: No solution, 6 tiles discovered.
+Student output: No solution, 3 tiles discovered.
+
+-------------------------------------------------------------------------------
+Test case Spec-P-Ls: Failed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1508/2062 
+Line: 1
+Correct output: "Star"...
+Student output: "No s"...
+
+-------------------------------------------------------------------------------
+Test case Spec-P-MQ: Failed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1508/2056 
+Line: 1
+Correct output: "Path"...
+Student output: "No s"...
+
+-------------------------------------------------------------------------------
+Test case Spec-P-MS: Failed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1508/2057 
+Line: 1
+Correct output: "Path"...
+Student output: "No s"...
+
+-------------------------------------------------------------------------------
+Test case SpecLQ: Failed
+    Runtime (sec): 0.001/0.006 
+    Memory (kb): 1508/2061 
+Line: 2
+Correct output: ..."0,2,"... truncated at position 1
+Student output: ..."0, 2"... truncated at position 1
+
+-------------------------------------------------------------------------------
+Test case SpecLS: Failed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1508/2062 
+Line: 2
+Correct output: ..."0,2,"... truncated at position 1
+Student output: ..."0, 2"... truncated at position 1
+
+-------------------------------------------------------------------------------
+Test case SpecMq: Failed
+    Runtime (sec): 0.002/0.006 
+    Memory (kb): 1504/2057 
+Line: 1
+Correct output: "Star"...
+Student output: "//St"...
+
+-------------------------------------------------------------------------------
+Test case SpecMs: Failed
+    Runtime (sec): 0.001/0.006 
+    Memory (kb): 1508/2057 
+Line: 1
+Correct output: "Star"...
+Student output: "//St"...
+
+-------------------------------------------------------------------------------
+Test case M2q: Failed
+    Runtime (sec): 0.003/0.007 
+    Memory (kb): 2108/2171 
+Line: 1
+Correct output: "No s"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+-------------------------------------------------------------------------------
+Test case M2s: Failed
+    Runtime (sec): 0.002/0.007 
+    Memory (kb): 2108/2188 
+Line: 1
+Correct output: "No s"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+-------------------------------------------------------------------------------
+Test case M4Q: Failed
+    Runtime (sec): 0.003/0.012 
+    Memory (kb): 4220/2645 (memory exceeded by a factor of 1.595)
+Line: 1
+Correct output: "Path"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+-------------------------------------------------------------------------------
+Test case M4S: Failed
+    Runtime (sec): 0.005/0.032 
+    Memory (kb): 4220/2947 (memory exceeded by a factor of 1.432)
+Line: 1
+Correct output: "Path"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+-------------------------------------------------------------------------------
+Test case L2Q: Failed
+    Runtime (sec): 0.721/0.461 (time exceeded by a factor of 1.564)
+    Memory (kb): 452884/57475 (memory exceeded by a factor of 7.880)
+Line: 2
+Correct output: ..."0,11"... truncated at position 1
+Student output: ..."0, 1"... truncated at position 1
+
+-------------------------------------------------------------------------------
+Test case L10s: Failed
+    Runtime (sec): 0.155/0.528 
+    Memory (kb): 284716/60142 (memory exceeded by a factor of 4.734)
+Line: 1
+Correct output: "Star"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+-------------------------------------------------------------------------------
+Test case L2S: Failed
+    Runtime (sec): 0.769/0.614 (time exceeded by a factor of 1.252)
+    Memory (kb): 452884/69051 (memory exceeded by a factor of 6.559)
+Line: 2
+Correct output: ..."0,11"... truncated at position 1
+Student output: ..."0, 1"... truncated at position 1
+
+-------------------------------------------------------------------------------
+Test case L10q: Failed
+    Runtime (sec): 0.138/0.704 
+    Memory (kb): 284716/59944 (memory exceeded by a factor of 4.750)
+Line: 1
+Correct output: "Star"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+-------------------------------------------------------------------------------
+Test case L8Q: Failed
+    Runtime (sec): 0.694/1.181 
+    Memory (kb): 1118148/221303 (memory exceeded by a factor of 5.053)
+Line: 1
+Correct output: "Path"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+-------------------------------------------------------------------------------
+Test case L1Q: Failed
+    Runtime (sec): 1.139/1.370 
+    Memory (kb): 452880/57473 (memory exceeded by a factor of 7.880)
+Line: 2
+Correct output: ..."0,11"... truncated at position 1
+Student output: ..."0, 1"... truncated at position 1
+
+-------------------------------------------------------------------------------
+Test case L1S: Failed
+    Runtime (sec): 1.156/1.380 
+    Memory (kb): 452880/69052 (memory exceeded by a factor of 6.559)
+Line: 2
+Correct output: ..."0,11"... truncated at position 1
+Student output: ..."0, 1"... truncated at position 1
+
+-------------------------------------------------------------------------------
+Test case L8S: Failed
+    Runtime (sec): 0.634/1.801 
+    Memory (kb): 1118148/232705 (memory exceeded by a factor of 4.805)
+Line: 1
+Correct output: "Path"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+-------------------------------------------------------------------------------
+Test case L3Q: Failed
+    Runtime (sec): 1.109/1.803 
+    Memory (kb): 366988/78914 (memory exceeded by a factor of 4.650)
+Line: 2
+Correct output: ..."4,4,"... truncated at position 1
+Student output: ..."4, 4"... truncated at position 1
+
+-------------------------------------------------------------------------------
+Test case L3S: Failed
+    Runtime (sec): 1.130/1.983 
+    Memory (kb): 366988/93653 (memory exceeded by a factor of 3.919)
+Line: 2
+Correct output: ..."4,4,"... truncated at position 1
+Student output: ..."4, 4"... truncated at position 1
+
+-------------------------------------------------------------------------------
+Test case L6s: Failed
+    Runtime (sec): 0.966/3.130 
+    Memory (kb): 2079496/548734 (memory exceeded by a factor of 3.790)
+Line: 1
+Correct output: "No s"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+-------------------------------------------------------------------------------
+Test case L6q: Failed
+    Runtime (sec): 0.983/3.765 
+    Memory (kb): 2079496/455427 (memory exceeded by a factor of 4.566)
+Line: 1
+Correct output: "No s"...
+Student output: ""
+
+Your exit status is 1 when it should be 0
+Student error output: "Unknown map character"
+
+-------------------------------------------------------------------------------
+Test case L7q: Failed
+    Runtime (sec): 4.758/7.753 
+    Memory (kb): 1118140/221303 (memory exceeded by a factor of 5.053)
+Line: 1
+Correct output: "Star"...
+Student output: "No s"...
+
+-------------------------------------------------------------------------------
+Test case L7s: Failed
+    Runtime (sec): 4.636/7.943 
+    Memory (kb): 1118140/228547 (memory exceeded by a factor of 4.892)
+Line: 1
+Correct output: "Star"...
+Student output: "No s"...
+
+-------------------------------------------------------------------------------
+Test case L5s: Failed
+    Runtime (sec): 6.673/10.140 
+    Memory (kb): 2079476/456278 (memory exceeded by a factor of 4.557)
+Line: 1
+Correct output: "Star"...
+Student output: "No s"...
+
+-------------------------------------------------------------------------------
+Test case L5q: Failed
+    Runtime (sec): 6.494/12.312 
+    Memory (kb): 2079476/455449 (memory exceeded by a factor of 4.566)
+Line: 1
+Correct output: "Star"...
+Student output: "No s"...
+
+-------------------------------------------------------------------------------
+You passed 8 out of 47 test cases, earning 13.62 of 80.00 points
+
+
+===============================================================================
+Scoring student test files.
+   There are 13 bugs to find in our code.
+   You need to find 5 bugs to start earning points, 10 to receive full points.
+   You will earn an extra submit per day after catching at least 8 bugs in any one submission.
+
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+
+You caught 0 of 13 buggy solutions in 0 valid test files, earning 0.0 of 10.0 points
+
+
+===============================================================================
+Testing for memory leaks: Passed (your program did not leak any memory)
+You earned 10.00 of 10.00 for this test
+
+
+===============================================================================
+
+Total points earned: (13.62 for code) + (0.0 for test files) + (10.0 for no memory leaks) = 23.62 of 100.00 points

@@ -1,0 +1,5 @@
+﻿  project1.cpp
+project1.obj : error LNK2019: unresolved external symbol getopt_long referenced in function "int __cdecl getMode(int,char * * const)" (?getMode@@YAHHQEAPEAD@Z)
+project1.obj : error LNK2001: unresolved external symbol opterr
+project1.obj : error LNK2001: unresolved external symbol optarg
+C:\Users\lenovo\Documents\PEIRAN\UMICH\eecs281\Project1\x64\Debug\Project1.exe : fatal error LNK1120: 3 unresolved externals

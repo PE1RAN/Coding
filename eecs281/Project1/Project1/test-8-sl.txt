@@ -1,0 +1,15 @@
+K
+3
+3
+//castle room 0
+S55
+..5
+5.1
+//castle room 1
+000
+000
+002
+//castle room 2
+C..
+!!.
+!!.
