@@ -1,0 +1,49 @@
+% % New table 281class with column(s) emotion person Y/N created
+% Added 22 rows to 281class from position 0 to 21
+% % person emotion 
+students stressed 
+office_hours busy 
+students stressed 
+bb bbb 
+bb bbb 
+bb sadf 
+cc ccc 
+dd ddd 
+ee eee 
+ff fff 
+gg ggg 
+hh hhh 
+ii iii 
+jj jjj 
+bb bbb 
+asdf asdf 
+Printed 16 matching rows from 281class
+% Created hash index for table 281class on column person
+% person emotion 
+students stressed 
+office_hours busy 
+students stressed 
+bb bbb 
+bb bbb 
+bb sadf 
+cc ccc 
+dd ddd 
+ee eee 
+ff fff 
+gg ggg 
+hh hhh 
+ii iii 
+jj jjj 
+bb bbb 
+asdf asdf 
+Printed 16 matching rows from 281class
+% New table pets with column(s) Name likes_cats? likes_dogs? created
+% Added 2 rows to pets from position 0 to 1
+% Name emotion likes_dogs? 
+Sith happy true 
+Sith victorious true 
+Paoletti stressed false 
+Printed 3 rows from joining pets to 281class
+% Table pets deleted
+% Table 281class deleted
+% Thanks for being silly!
